@@ -22,6 +22,7 @@ variable "allocated_storage" {
 
 variable "storage_encrypted" {
   description = "Specifies whether the DB instance is encrypted"
+  default     = true
 }
 
 
@@ -76,6 +77,7 @@ variable "vpc_security_group_ids" {
 
 variable "multi_az" {
   description = "Specifies if the RDS instance is multi-AZ"
+  default     = false
 }
 
 
@@ -171,4 +173,105 @@ variable "aws_region" {
 variable "kms_key_id" {
   description = "The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used"
   type        = "string" 
+}
+
+
+variable "cloud_provider" {
+  description = "Cloud Provider for the catalog"
+}
+
+
+variable "db_subnet_group_name" {
+  description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
+  type        = "string"
+  default     = ""
+}
+
+variable "parameter_group_description" {
+  description = "Description of the DB parameter group to create"
+  type        = "string"
+  default     = ""
+}
+
+variable "parameter_group_name" {
+  description = "Name of the DB parameter group to associate or create"
+  type        = "string"
+  default     = ""
+}
+
+variable "option_group_name" {
+  description = "Name of the DB option group to associate. Setting this automatically disables option_group creation"
+  type        = "string"
+  default     = ""
+}
+variable "option_group_description" {
+  description = "The description of the option group"
+  type        = "string"
+  default     = ""
+}
+
+variable "major_engine_version" {
+  description = "Specifies the major version of the engine that this option group should be associated with"
+  type        = "string"
+  default     = ""
+}
+
+
+variable "family" {
+  description = "The family of the DB parameter group"
+  type        = "string"
+  default     = ""
+}
+
+variable "subnet_ids" {
+  description = "A list of VPC subnet IDs"
+  type        = "list"
+  default     = []
+}
+
+variable "vpc_id" {
+  type        = "string"
+  description = "VPC Id to associate with RDS MySQL."
+  default     = ""
+}
+
+
+variable "parameters" {
+  description = "A list of DB parameters (map) to apply"
+  type        = "list"
+  default     = []
+}
+
+
+variable "engine_name" {
+  
+}
+variable "options" {
+  description = "A list of Options to apply."
+  default     = []
+}
+
+variable "create_before_destroy"{
+    type        = "string"
+}
+
+
+variable "allow_major_version_upgrade" {
+  description = "Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible"
+  default     = false
+}
+
+variable "auto_minor_version_upgrade" {
+  description = "Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window"
+  default     = true
+}
+
+variable "skip_final_snapshot" {
+  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier"
+  default     = true
+}
+
+variable "description" {
+  type    = "string"
+  default = ""
 }
